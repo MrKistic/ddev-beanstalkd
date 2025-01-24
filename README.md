@@ -1,20 +1,18 @@
-[![tests](https://github.com/ddev/ddev-beanstalkd/actions/workflows/tests.yml/badge.svg)](https://github.com/ddev/ddev-beanstalkd/actions/workflows/tests.yml)
+[![tests](https://github.com/mrkistic/ddev-beanstalkd/actions/workflows/tests.yml/badge.svg)](https://github.com/mrkistic/ddev-beanstalkd/actions/workflows/tests.yml)
 
 ## What is this?
 
-This repository allows you to quickly install [beanstalkd](https://beanstalkd.github.io/) into a [DDEV](https://ddev.readthedocs.io) project using just `ddev get ddev/ddev-beanstalkd`.
+This repository allows you to quickly install [beanstalkd](https://beanstalkd.github.io/) into a [DDEV](https://ddev.readthedocs.io) project using just `ddev get mrkistic/ddev-beanstalkd`.
 
 ## Installation
 
-1.`ddev get ddev/ddev-beanstalkd && ddev restart`
-
-## Caveats
-
-The `schickling/beanstalkd` image used here is amd64 only, and will not work with arm64 computers like the Mac M1.
+1.`ddev get mrkistic/ddev-beanstalkd && ddev restart`
 
 ## Explanation
 
-This beanstalkd recipe for [ddev](https://ddev.readthedocs.io) installs [`.ddev/docker-compose.beanstalkd.yaml`](docker-compose.beanstalkd.yaml) which usees the `schickling/beanstalkd` docker image. Note that this image seems to be unmaintained and does not work with Mac M1 (arm64) computers. PRs to use a more recent image are welcome, and especially if they're maintained and support both amd64 and arm64.
+This beanstalkd recipe for [ddev](https://ddev.readthedocs.io) installs [`.ddev/docker-compose.beanstalkd.yaml`](docker-compose.beanstalkd.yaml) which uses the `rayyounghong/beanstalkd` docker image.
+
+This image *does* support arm64. See full supported OS/ARCH list at [Docker Hub](https://hub.docker.com/r/rayyounghong/beanstalkd/tags).
 
 ## Interacting with beanstalkd
 
