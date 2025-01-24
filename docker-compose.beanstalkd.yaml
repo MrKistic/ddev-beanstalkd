@@ -1,13 +1,12 @@
 # ddev beanstalkd recipe file
-#ddev-generated
 services:
   beanstalkd:
     container_name: ddev-${DDEV_SITENAME}-beanstalkd
     image: rayyounghong/beanstalkd
     restart: "no"
     expose:
-    - 11300 # beanstalkd is available at this port inside the container (default port for beanstalkd)
+      - 11300 # beanstalkd is available at this port inside the container (default port for beanstalkd)
     labels:
       com.ddev.site-name: ${DDEV_SITENAME}
     volumes:
-    - ".:/mnt/ddev_config"
+      - ".:/mnt/ddev_config"

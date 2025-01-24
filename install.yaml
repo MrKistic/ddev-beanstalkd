@@ -2,4 +2,4 @@ name: beanstalkd
 
 # files and directories listed here are copied into .ddev
 project_files:
-- docker-compose.beanstalkd.yaml
+  - docker-compose.beanstalkd.yaml

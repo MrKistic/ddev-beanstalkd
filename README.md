@@ -1,21 +1,43 @@
 [![tests](https://github.com/mrkistic/ddev-beanstalkd/actions/workflows/tests.yml/badge.svg)](https://github.com/mrkistic/ddev-beanstalkd/actions/workflows/tests.yml)
 
-## What is this?
+## What is ddev-beanstalkd?
 
-This repository allows you to quickly install [beanstalkd](https://beanstalkd.github.io/) into a [DDEV](https://ddev.readthedocs.io) project using just `ddev get mrkistic/ddev-beanstalkd`.
+This add-on allows you to easily install [beanstalkd](https://beanstalkd.github.io/) (with arm64 support) into a [DDEV](https://ddev.readthedocs.io) project.
+
+It configures and installs the `rayyounghong/beanstalkd` docker image to provide a beanstalkd service within your DDEV project.
 
 ## Installation
 
-1.`ddev get mrkistic/ddev-beanstalkd && ddev restart`
+1. Install the addon
 
-## Explanation
+    For DDEV v1.23.5 or above run
 
-This beanstalkd recipe for [ddev](https://ddev.readthedocs.io) installs [`.ddev/docker-compose.beanstalkd.yaml`](docker-compose.beanstalkd.yaml) which uses the `rayyounghong/beanstalkd` docker image.
+    ```shell
+    ddev add-on get mrkistic/ddev-beanstalkd
+    ```
 
-This image *does* support arm64. See full supported OS/ARCH list at [Docker Hub](https://hub.docker.com/r/rayyounghong/beanstalkd/tags).
+   For earlier versions of DDEV run
 
-## Interacting with beanstalkd
+    ```shell
+    ddev get mrkistic/ddev-beanstalkd
+    ```
 
-* The beanstalkd instance will listen on TCP port 11300 (the beanstalkd default).
-* Configure your application to access beanstalkd on the host:port `beanstalkd:11300`.
-* To reach the beanstalkd admin interface, run ddev ssh to connect to the web container, then use nc or telnet to connect to the beanstalkd container on port 11300, i.e. nc beanstalkd 11300. 
+2. Restart DDEV to start the addon.
+
+   ```shell
+   ddev restart
+   ```
+
+## Using beanstalkd service
+
+* beanstalkd listens on the default port 11300 on internal hostname `bankstalkd`.
+* Configure your application to access beanstalkd on the host:port, i.e. `beanstalkd:11300`.
+* To access beanstalkd directly, run `ddev ssh` to connect to the web container, then telnet to the beanstalkd container on port 11300, e.g. `telnet beanstalkd 11300`. 
+* Alternatively, expose the listening port with a [custom Docker Compose](https://ddev.readthedocs.io/en/stable/users/extend/custom-compose-files/#docker-composeyaml-examples) file. Then connect directly to your docker container on port 11300, e.g. `telnet docker.lan 11300`. Then you can use a UI console like [aurora](https://github.com/xuri/aurora) to monitor your beanstalkd queue. e.g.:
+
+```yaml
+services:
+  my_beanstalkd:
+    ports:
+      - "11300:11300"
+```
